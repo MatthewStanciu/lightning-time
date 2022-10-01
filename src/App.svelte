@@ -1,26 +1,29 @@
 <script lang="ts">
   let timeString = "0~0~0~0";
+  let milliCharges = 0;
   let charges = 0;
   let sparks = 0;
   let zaps = 0;
   let bolts = 0;
 
-  const millisPerCharge = 1318.359375;
+  const millisPerMilliCharge = 82.3974609375; // 86400000 / 16^5
 
   function updateTime() {
     const time = new Date();
     const millis = 1000 * 60 * 60 * time.getHours() + 1000 * 60 * time.getMinutes() + 1000 * time.getSeconds() + time.getMilliseconds();
-    const totalCharges = millis / millisPerCharge;
+    const totalMilliCharges = millis / millisPerMilliCharge
+    const totalCharges = totalMilliCharges / 16;
     const totalSparks = totalCharges / 16;
     const totalZaps = totalSparks / 16;
     const totalBolts = totalZaps / 16;
 
+    milliCharges = Math.floor(totalMilliCharges) % 16;
     charges = Math.floor(totalCharges) % 16;
     sparks = Math.floor(totalSparks) % 16;
     zaps = Math.floor(totalZaps) % 16;
     bolts = Math.floor(totalBolts) % 16;
 
-    timeString = bolts.toString(16) + "~" + zaps.toString(16) + "~" + sparks.toString(16) + "|" + charges.toString(16);
+    timeString = bolts.toString(16) + "~" + zaps.toString(16) + "~" + sparks.toString(16) + "|" + charges.toString(16) + milliCharges.toString(16);
   }
 
   updateTime();
