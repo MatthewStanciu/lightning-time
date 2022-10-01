@@ -27,7 +27,7 @@
   }
 
   updateTime();
-  setInterval(updateTime, 100);
+  setInterval(updateTime, 50);
 </script>
 
 <div style:background-image={`linear-gradient(90deg, rgb(${bolts * 16 + zaps}, 161, 0), rgb(150, ${zaps * 16 + sparks}, 100), rgb(85, 66, ${sparks * 16 + charges}))`}>
