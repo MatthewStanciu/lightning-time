@@ -27,7 +27,7 @@
   }
 
   updateTime();
-  setInterval(updateTime, 50);
+  setInterval(updateTime, 10);
 </script>
 
 <div style:background-image={`linear-gradient(90deg, rgb(${bolts * 16 + zaps}, 161, 0), rgb(150, ${zaps * 16 + sparks}, 100), rgb(85, 66, ${sparks * 16 + charges}))`}>
@@ -45,9 +45,16 @@
     font-variant-numeric: tabular-nums;
   }
   h1 {
-    font-size: 5rem;
+    font-size: 6rem;
     line-height: 1.1;
     font-family: 'Space Mono';
+  }
+  @media only screen and (max-width: 640px) {
+    h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      font-family: 'Space Mono';
+    }
   }
 
   @font-face {
