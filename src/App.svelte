@@ -30,7 +30,7 @@
   setInterval(updateTime, 10);
 </script>
 
-<div style:background-image={`linear-gradient(${window.innerWidth < 640 ? '180deg' : '90deg'}, rgb(${bolts * 16 + zaps}, 161, 0), rgb(50, ${zaps * 16 + sparks}, 150), rgb(180, 25, ${sparks * 16 + charges}))`}>
+<div style:background-image={`linear-gradient(${window.innerWidth < 640 ? '180deg' : '90deg'}, rgb(${bolts * 16 + zaps}, 161, 0), rgb(50, ${zaps * 16 + sparks}, 214), rgb(120, 15, ${sparks * 16 + charges}))`}>
   <h1>{timeString}</h1>
 </div>
 
