@@ -11,7 +11,7 @@
   function updateTime() {
     const time = new Date();
     const millis = 1000 * 60 * 60 * time.getHours() + 1000 * 60 * time.getMinutes() + 1000 * time.getSeconds() + time.getMilliseconds();
-    const totalMilliCharges = millis / millisPerMilliCharge
+    const totalMilliCharges = millis / millisPerMilliCharge;
     const totalCharges = totalMilliCharges / 16;
     const totalSparks = totalCharges / 16;
     const totalZaps = totalSparks / 16;
@@ -30,7 +30,7 @@
   setInterval(updateTime, 10);
 </script>
 
-<div style:background-image={`linear-gradient(${window.innerWidth < 640 ? '180deg' : '90deg'}, rgb(${bolts * 16 + zaps}, 161, 0), rgb(150, ${zaps * 16 + sparks}, 100), rgb(85, 66, ${sparks * 16 + charges}))`}>
+<div style:background-image={`linear-gradient(${window.innerWidth < 640 ? '180deg' : '90deg'}, rgb(${bolts * 16 + zaps}, 161, 0), rgb(50, ${zaps * 16 + sparks}, 150), rgb(180, 25, ${sparks * 16 + charges}))`}>
   <h1>{timeString}</h1>
 </div>
 
