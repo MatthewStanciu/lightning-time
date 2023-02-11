@@ -1,18 +1,23 @@
 <script lang="ts">
+  import { RGBToHSL } from "./helpers"
+
   let timeString = "0~0~0~0";
   let milliCharges = 0;
   let charges = 0;
   let sparks = 0;
   let zaps = 0;
   let bolts = 0;
+  let boltColors
+  let zapColors
+  let sparkColors
 
-  const millisPerMilliCharge = 82.3974609375; // 86400000 / 16^5
+  const millisPerMilliCharge = 1.3974609375; // 86400000 / 16^5
 
   function updateTime() {
     const time = new Date();
     const millis = 1000 * 60 * 60 * time.getHours() + 1000 * 60 * time.getMinutes() + 1000 * time.getSeconds() + time.getMilliseconds();
     const totalMilliCharges = millis / millisPerMilliCharge;
-    const totalCharges = totalMilliCharges / 16;
+    const totalCharges = millis / millisPerMilliCharge;
     const totalSparks = totalCharges / 16;
     const totalZaps = totalSparks / 16;
     const totalBolts = totalZaps / 16;
@@ -23,6 +28,10 @@
     zaps = Math.floor(totalZaps) % 16;
     bolts = Math.floor(totalBolts) % 16;
 
+    boltColors = RGBToHSL(bolts * 16 + zaps, 130, 185)
+    zapColors = RGBToHSL(180, zaps * 16 + sparks, 150)
+    sparkColors = RGBToHSL(180, 40, sparks * 16 + charges)
+
     timeString = bolts.toString(16) + "~" + zaps.toString(16) + "~" + sparks.toString(16) + "|" + charges.toString(16) + milliCharges.toString(16);
   }
 
@@ -30,7 +39,7 @@
   setInterval(updateTime, 10);
 </script>
 
-<div style:background-image={`linear-gradient(${window.innerWidth < 640 ? '180deg' : '90deg'}, rgb(${bolts * 16 + zaps}, 161, 0), rgb(50, ${zaps * 16 + sparks}, 214), rgb(246, 113, ${sparks * 16 + charges}))`}>
+<div style:background-image={`linear-gradient(${window.innerWidth < 640 ? '180deg' : '90deg'}, hsl(${boltColors[0]} ${boltColors[1] * 3}% ${boltColors[2]}%), hsl(${zapColors[0]} ${zapColors[1] * 2.5}% ${zapColors[2]}%), hsl(${sparkColors[0]} ${sparkColors[1] * 2.5}% ${sparkColors[2]}%))`}>
   <h1>{timeString}</h1>
 </div>
 
